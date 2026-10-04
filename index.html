@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0D47A1">
+<title>BitacObra · Control de Campo</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Modo Claro (Azules, Negros, Blanco y Beige Crema) */
+:root {
+  --bg: #F4F1EA;       
+  --bg2: #FFFFFF;      
+  --fg: #0F1115;       
+  --mut: #545F71;      
+  --acc: #0D47A1;      
+  --accf: #FFFFFF;     
+  --line: #E2DCD0;     
+  --inbg: #FFFFFF;     
+  --inb: #C7C1B5;      
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Modo Oscuro Corporativo */
+[data-theme=dark] {
+  --bg: #0B0D12;       /* Fondo súper oscuro (casi negro) */
+  --bg2: #161A23;      /* Tarjetas oscuras */
+  --fg: #E6E1D6;       /* Texto claro (beige suavizado) */
+  --mut: #8B95A5;      /* Texto secundario gris */
+  --acc: #3B82F6;      /* Azul más brillante para contrastar en oscuro */
+  --accf: #FFFFFF;
+  --line: #262D3D;     /* Líneas oscuras */
+  --inbg: #0B0D12;
+  --inb: #262D3D;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body { font: 400 16px/1.5 'Outfit', system-ui, sans-serif; background: var(--bg); color: var(--fg); max-width: 800px; margin: 0 auto; min-height: 100vh; padding: 0 1.2rem 6rem; transition: background 0.3s, color 0.3s; }
+button, input, select, textarea { font: inherit; color: inherit; }
+
+header { position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); padding: .8rem 0 .3rem; z-index: 5; border-bottom: 1px solid var(--line); margin-bottom: 1rem; transition: background 0.3s; }
+.top { display: flex; justify-content: space-between; align-items: center; gap: .6rem; }
+h1 { font-size: 1.45rem; font-weight: 600; } 
+h1 small { display: block; font-size: .8rem; font-weight: 300; color: var(--mut); }
+h2 { font-size: 1.4rem; font-weight: 600; margin: .6rem 0; color: var(--acc); }
+h3 { font-size: 1.1rem; font-weight: 600; margin: 1.2rem 0 .5rem; }
+.mut { color: var(--mut); }
+
+.brand { display: flex; align-items: center; gap: .6rem; flex: 1; }
+.lg { width: 34px; height: 34px; flex: none; }
+
+/* Botón de Tema */
+.ib { background: none; border: 1.5px solid var(--line); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; flex: none; display: flex; align-items: center; justify-content: center; color: var(--fg); transition: all 0.2s; }
+.ib:active { background: var(--line); }
+
+/* Navegación inferior tipo app */
+nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 800px; display: flex; background: var(--bg2); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom, 0px); z-index: 10; transition: background 0.3s; }
+nav button { flex: 1; background: none; border: 0; padding: 1rem .3rem; cursor: pointer; color: var(--mut); font-weight: 500; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.85rem; transition: color 0.2s; }
+nav button.on { color: var(--acc); font-weight: 600; box-shadow: inset 0 4px var(--acc); }
+nav svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Formularios y Tarjetas */
+input, select, textarea { width: 100%; padding: .75rem 1rem; background: var(--inbg); border: 1.5px solid var(--inb); border-radius: 8px; margin: .3rem 0 .6rem; font-size: 1.05rem; font-weight: 500; transition: background 0.3s, border 0.3s; }
+textarea { resize: vertical; min-height: 100px; }
+:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+
+.btn { display: block; width: 100%; padding: .95rem; margin-top: 1rem; background: var(--acc); color: var(--accf); border: 1.5px solid var(--acc); cursor: pointer; font-weight: 500; border-radius: 8px; text-align: center; transition: opacity 0.2s, background 0.3s; }
+.btn:active { opacity: 0.8; }
+.btn.ghost { background: none; color: var(--acc); }
+
+.card { background: var(--bg2); border: 1.5px solid var(--line); border-left: 4px solid var(--acc); padding: 1rem; border-radius: 10px; margin-bottom: .8rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: background 0.3s, border 0.3s; }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; }
+.chk { display: flex; align-items: center; gap: .8rem; font-size: 1.05rem; font-weight: 500; cursor: pointer; padding: .5rem 0; }
+.chk input[type="checkbox"] { width: 22px; height: 22px; margin: 0; accent-color: var(--acc); }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+.chip-group { display: flex; gap: .5rem; margin: .5rem 0; flex-wrap: wrap; }
+.chip { padding: .4rem 1rem; border: 1.5px solid var(--inb); border-radius: 99px; background: var(--bg2); cursor: pointer; font-weight: 500; color: var(--fg); transition: all 0.2s; }
+.chip.on { background: var(--acc); color: var(--accf); border-color: var(--acc); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="top">
+    <div class="brand">
+      <svg class="lg" viewBox="0 0 400 400" aria-hidden="true">
+        <rect width="400" height="400" rx="88" fill="var(--acc)"/>
+        <path d="M 120 140 L 120 300 A 20 20 0 0 0 140 320 L 260 320 A 20 20 0 0 0 280 300 L 280 140" fill="none" stroke="var(--accf)" stroke-width="32" stroke-linecap="round"/>
+        <line x1="160" y1="100" x2="240" y2="100" stroke="var(--accf)" stroke-width="40" stroke-linecap="round"/>
+        <line x1="160" y1="200" x2="240" y2="200" stroke="var(--accf)" stroke-width="24" stroke-linecap="round"/>
+        <line x1="160" y1="260" x2="210" y2="260" stroke="var(--accf)" stroke-width="24" stroke-linecap="round"/>
+      </svg>
+      <h1>BitacObra<small>Control de Campo</small></h1>
+    </div>
+    <!-- Botón de Modo Oscuro/Claro -->
+    <button class="ib" id="th" aria-label="Cambiar modo claro u oscuro">◐</button>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<nav id="nav">
+  <button data-v="diario" class="on">
+    <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+    Diario
+  </button>
+  <button data-v="cuadrilla">
+    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+    Cuadrilla
+  </button>
+  <button data-v="punch">
+    <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+    Pendientes
+  </button>
+</nav>
+
+<script>
+const $ = s => document.querySelector(s);
+const get = k => { try { return localStorage.getItem(k) } catch (e) { return null } };
+const set = (k, x) => { try { localStorage.setItem(k, x) } catch (e) {} };
+
+// Lógica de Modo Claro/Oscuro
+let dk = get('bo_t') ? get('bo_t') == 'd' : matchMedia('(prefers-color-scheme:dark)').matches;
+const theme = () => { 
+  document.documentElement.dataset.theme = dk ? 'dark' : 'light'; 
+  set('bo_t', dk ? 'd' : 'l');
+  // Actualizar el meta theme-color para el navegador del celular
+  $('meta[name="theme-color"]').setAttribute("content", dk ? "#0B0D12" : "#0D47A1");
+};
+theme();
+$('#th').onclick = () => { dk = !dk; theme(); };
+
+let view = 'diario';
+
+function render() {
+  document.querySelectorAll('#nav button').forEach(b => {
+    b.classList.toggle('on', b.dataset.v === view);
+    b.onclick = () => { view = b.dataset.v; render(); };
+  });
+
+  const app = $('#app');
+  
+  if (view === 'diario') {
+    app.innerHTML = `
+      <h2>Bitácora Diaria</h2>
+      <p class="mut">Registra las actividades y condiciones del día.</p>
+      
+      <div style="margin-top:1.5rem">
+        <label>Fecha<input type="date" value="${new Date().toISOString().split('T')[0]}"></label>
+        
+        <label>Clima (Selecciona uno)</label>
+        <div class="chip-group">
+          <button class="chip on">☀️ Soleado</button>
+          <button class="chip">⛅ Nublado</button>
+          <button class="chip">🌧 Lluvia</button>
+        </div>
+
+        <label style="margin-top:1rem;display:block">Actividades Realizadas<textarea placeholder="Ej: Vaciado de losa nervada, armado de columnas eje A..."></textarea></label>
+        
+        <label>Incidentes o Retrasos<textarea placeholder="Ej: El camión de concreto llegó tarde, lluvia paralizó obra 2 horas..." style="min-height:70px"></textarea></label>
+        
+        <button class="btn ghost" style="border:1.5px dashed var(--acc); display:flex; align-items:center; justify-content:center; gap:8px">
+          <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          Adjuntar Foto del Día
+        </button>
+        
+        <button class="btn">Guardar Reporte</button>
+      </div>
+    `;
+  } 
+  
+  else if (view === 'cuadrilla') {
+    app.innerHTML = `
+      <h2>Control de Cuadrilla</h2>
+      <p class="mut">Asistencia y adelantos de la semana.</p>
+      
+      <div class="grid-2" style="margin-top:1.5rem">
+        <button class="btn" style="margin-top:0">+ Agregar Obrero</button>
+        <button class="btn ghost" style="margin-top:0; border:1px solid var(--acc)">Cálculo Sábado</button>
+      </div>
+
+      <h3 style="margin-top:2rem">Asistencia de Hoy</h3>
+      
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <b>Juan Pérez</b>
+            <small class="mut">Maestro de Obra · $30/día</small>
+          </div>
+          <button class="btn ghost" style="margin:0;padding:0.3rem 0.6rem;width:auto;font-size:0.9rem">Adelanto</button>
+        </div>
+        <label class="chk" style="margin-top:0.5rem">
+          <input type="checkbox" checked> Asistió hoy
+        </label>
+      </div>
+
+      <div class="card" style="border-left-color:var(--line)">
+        <div class="card-header">
+          <div>
+            <b>Carlos Gómez</b>
+            <small class="mut">Ayudante · $15/día</small>
+          </div>
+          <button class="btn ghost" style="margin:0;padding:0.3rem 0.6rem;width:auto;font-size:0.9rem">Adelanto</button>
+        </div>
+        <label class="chk" style="margin-top:0.5rem">
+          <input type="checkbox"> Asistió hoy
+        </label>
+      </div>
+    `;
+  }
+  
+  else if (view === 'punch') {
+    app.innerHTML = `
+      <h2>Pendientes (Punch List)</h2>
+      <p class="mut">Detalles a corregir antes de entregar la obra.</p>
+      
+      <div style="display:flex;gap:10px;margin-top:1.5rem">
+        <input type="text" placeholder="Ej: Pintar mancha en pasillo" style="margin:0">
+        <button class="btn" style="margin:0;width:auto;padding:0 1.2rem;font-size:1.5rem;line-height:1">+</button>
+      </div>
+
+      <h3 style="margin-top:2rem">Pendientes por resolver</h3>
+      
+      <div class="card">
+        <label class="chk">
+          <input type="checkbox">
+          <span style="flex:1">Falta marco puerta principal</span>
+        </label>
+        <div style="padding-left:34px;display:flex;gap:8px">
+          <span class="mut" style="font-size:0.85rem">Responsable: <b>Carpintero</b></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <label class="chk">
+          <input type="checkbox">
+          <span style="flex:1">Fuga en lavamanos baño visita</span>
+        </label>
+        <div style="padding-left:34px;display:flex;gap:8px">
+          <span class="mut" style="font-size:0.85rem">Responsable: <b>Plomero</b></span>
+        </div>
+      </div>
+
+      <h3 style="margin-top:2rem">Corregidos</h3>
+      <div class="card" style="border-left-color:var(--line);background:none;box-shadow:none">
+        <label class="chk" style="opacity:0.6">
+          <input type="checkbox" checked disabled>
+          <span style="flex:1;text-decoration:line-through">Cerámica rota en cocina</span>
+        </label>
+      </div>
+    `;
+  }
+}
+
+document.body.addEventListener('click', e => {
+  if (e.target.matches('.chip-group .chip')) {
+    e.target.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
+    e.target.classList.add('on');
+  }
+});
+
+render();
+</script>
+</body>
+</html>
