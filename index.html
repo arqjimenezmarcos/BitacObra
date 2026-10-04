@@ -7,7 +7,7 @@
 <title>BitacObra · Bitácora de campo</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#E4E5E1;--bg2:#F7F7F5;--tint:#EDEEEA;--fg:#1B2430;--mut:#5E6773;--acc:#1D4ED8;--accf:#fff;--line:#CBCDC7;--sig:#F26A21;--hd:#16213A;--cd:'Barlow Condensed','Arial Narrow',sans-serif}
+:root{--bg:#F0F0EE;--bg2:#FFFFFF;--tint:#F5F5F3;--fg:#1B2430;--mut:#5E6773;--acc:#1D4ED8;--accf:#fff;--line:#E1E2DE;--sig:#F26A21;--hd:#16213A;--cd:'Barlow Condensed','Arial Narrow',sans-serif}
 [data-theme=dark]{--bg:#12161C;--bg2:#1B2129;--tint:#161C24;--fg:#E8EAEE;--mut:#98A1AD;--acc:#6EA0FF;--accf:#10151C;--line:#2B333E;--hd:#0C1016}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font:400 16px/1.5 Barlow,system-ui,sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;padding-bottom:calc(5.5rem + env(safe-area-inset-bottom,0px))}
@@ -18,26 +18,26 @@ header{position:sticky;top:0;z-index:5;background:var(--hd);color:#fff;padding-t
 .brand{display:flex;align-items:center;gap:.65rem;flex:1}.lg{width:40px;height:40px;flex:none}
 h1{font:700 1.7rem/1 var(--cd);letter-spacing:.02em}h1 small{display:block;font:400 .8rem/1.3 Barlow;opacity:.7;letter-spacing:0}
 .ib{width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(255,255,255,.35);background:none;color:#fff;font-size:1.15rem;cursor:pointer}
-.obr{padding:.6rem 0 .75rem}.obr input{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.25);color:#fff;margin:0;padding:.5rem .8rem}.obr input::placeholder{color:rgba(255,255,255,.6)}
+.obr{padding:.6rem 0 .75rem}.obr{display:flex;gap:.5rem;align-items:center}.obr select{flex:1}.obr option{color:#000}.obr select,.obr input{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.25);color:#fff;margin:0;padding:.5rem .8rem}.obr input::placeholder{color:rgba(255,255,255,.6)}
 .tape{height:6px;background:repeating-linear-gradient(-45deg,var(--sig) 0 10px,#111 10px 20px)}
 main{padding-top:1.2rem}
 h2{font:700 2.1rem/1.05 var(--cd);margin:.5rem 0 .3rem}
 .mut,small{color:var(--mut)}
 .fol{display:inline-block;border:2px solid var(--sig);color:var(--sig);border-radius:4px;padding:.05rem .6rem;font:700 1.35rem/1.3 var(--cd);letter-spacing:.05em;transform:rotate(-2deg)}
-.hoja{background:var(--bg2);border:1px solid var(--line);border-left:5px solid var(--acc);border-radius:6px;margin:1rem 0}
-.hh{display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.55rem .9rem;border-bottom:1px solid var(--line);background:var(--tint);border-radius:0 6px 0 0;font:600 1.25rem/1.2 var(--cd)}
+.hoja{background:var(--bg2);border-radius:10px;margin:1.2rem 0;box-shadow:0 1px 2px rgba(20,30,50,.06),0 6px 20px rgba(20,30,50,.06)}
+.hh{display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.55rem .9rem;border-bottom:1px solid var(--line);border-radius:10px 10px 0 0;font:600 1.25rem/1.2 var(--cd)}
 .hh span+span{font:500 .9rem Barlow;color:var(--mut)}
-.hb{padding:.8rem .9rem}.hb>p+p{margin-top:.3rem}
+.hb{padding:1rem 1.1rem}.hb>p+p{margin-top:.3rem}
 label{display:block;font-weight:500;font-size:.92rem;color:var(--mut);margin-top:.75rem}
-input,select,textarea{width:100%;padding:.65rem .8rem;background:var(--bg);border:1.5px solid var(--line);border-radius:4px;margin-top:.25rem;color:var(--fg);font-size:1rem}
+input,select,textarea{width:100%;min-height:50px;padding:.75rem .9rem;background:var(--bg);border:1.5px solid var(--line);border-radius:4px;margin-top:.25rem;color:var(--fg);font-size:1rem}
 textarea{min-height:110px;resize:vertical}
 :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-input[type=checkbox]{width:24px;height:24px;margin:0;accent-color:var(--acc);flex:none}
-.btn{display:block;width:100%;padding:.8rem;margin-top:.9rem;background:var(--acc);color:var(--accf);border:1.5px solid var(--acc);border-radius:4px;font-weight:600;font-size:1.05rem;cursor:pointer;text-align:center}
+input[type=checkbox]{width:28px;height:28px;min-height:0;margin:0;accent-color:var(--acc);flex:none}
+.btn{display:block;width:100%;min-height:52px;padding:.95rem;margin-top:.9rem;background:var(--acc);color:var(--accf);border:1.5px solid var(--acc);border-radius:4px;font-weight:600;font-size:1.05rem;cursor:pointer;text-align:center}
 .btn:active{transform:translateY(1px);opacity:.85}.btn.g{background:none;color:var(--acc)}.btn.sm{display:inline-block;width:auto;padding:.4rem .9rem;margin:.5rem .4rem 0 0;font-size:.92rem}
 .x{background:none;border:0;color:var(--mut);font-size:1.1rem;cursor:pointer;padding:.3rem .5rem}
 .chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.35rem}
-.ch{padding:.5rem 1rem;border:1.5px solid var(--line);background:var(--bg);border-radius:4px;font-weight:500;cursor:pointer}.ch.on{background:var(--acc);color:var(--accf);border-color:var(--acc)}
+.ch{padding:.8rem 1.2rem;border:1.5px solid var(--line);background:var(--bg);border-radius:4px;font-weight:500;cursor:pointer}.ch.on{background:var(--acc);color:var(--accf);border-color:var(--acc)}
 .tag{display:inline-block;background:var(--tint);border:1px solid var(--line);border-radius:4px;padding:.15rem .6rem;margin:0 .4rem .4rem 0;font-weight:500}
 .ph{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.7rem;margin-top:.7rem}
 .ph figure{position:relative;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--bg)}.ph img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
@@ -68,7 +68,16 @@ table{width:100%;border-collapse:collapse;margin-top:.6rem}th,td{text-align:righ
 .doc h4{font:700 1.15rem var(--cd);margin:.9rem 0 .2rem;border-bottom:1px solid #16213A}
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}.fg figure{break-inside:avoid;border:1px solid #bbb}.fg img{display:block;width:100%;max-height:75mm;object-fit:contain;background:#f2f2f2}.fg figcaption{padding:.25rem .4rem;font-size:11px;border-top:1px solid #bbb}
 .fm{margin:2.5rem auto 0;width:60%;text-align:center;break-inside:avoid}.fm i{display:block;border-top:1.5px solid #16213A;margin-bottom:.2rem}
-@page{size:A4;margin:12mm}
+dialog[open]{animation:up .25s ease-out}@keyframes up{from{transform:translateY(40px);opacity:0}}
+@media(max-width:600px){dialog{margin:auto auto 0;width:100%;max-width:none;border-radius:14px 14px 0 0}}
+@media(prefers-reduced-motion:reduce){dialog[open]{animation:none}}
+.vac{text-align:center;padding:2rem 1rem;color:var(--mut)}.vac svg{margin-bottom:.6rem}.ph img{cursor:zoom-in}
+.dh{border-bottom:1px solid #D5D8DE;padding-bottom:.8rem}.dh>div.dt{flex:1 1 auto}.dt b{font-size:1.7rem}.dl{max-height:46px;max-width:120px;object-fit:contain}
+.dm{border-bottom:1px solid #D5D8DE;padding:.8rem 0}
+.doc h4{font:600 1rem var(--cd);color:#1D4ED8;border-bottom:1px solid #D5D8DE;margin:1.1rem 0 .3rem;padding-bottom:.15rem}
+.fg figure{border:0}.fg img{border-radius:3px}.fg figcaption{border:0;padding:.25rem 0}
+.dw{width:100%;border-collapse:collapse}.dw td{padding:0}.dw tfoot{display:table-footer-group}.pf{padding-top:3mm!important;border-top:1px solid #D5D8DE;text-align:center;font-size:10px;color:#777}
+@page{size:A4;margin:13mm 14mm 14mm}
 @media print{*{-webkit-print-color-adjust:exact;print-color-adjust:exact}body>*:not(#rp){display:none!important}body{background:#fff;padding:0}#rp{display:block}.doc{padding:0}}
 </style>
 </head>
@@ -79,7 +88,7 @@ table{width:100%;border-collapse:collapse;margin-top:.6rem}th,td{text-align:righ
     <button class="ib" id="ins" hidden style="width:auto;padding:0 .9rem;border-radius:99px;font-size:.9rem;font-weight:600">Instalar</button>
     <button class="ib" id="th" aria-label="Cambiar entre modo claro y oscuro">◐</button>
   </div>
-  <div class="in obr"><input id="ob" placeholder="Nombre de la obra (sale en cada reporte)" aria-label="Nombre de la obra"></div>
+  <div class="in obr"><select id="ps" aria-label="Obra activa"></select><button class="ib" data-a="nobra" aria-label="Nueva obra">＋</button><button class="ib" data-a="ajustes" aria-label="Ajustes">⚙</button></div>
   <div class="tape"></div>
 </header>
 <main id="app" class="in"></main>
@@ -99,7 +108,7 @@ const logo=(a,b)=>`<svg class="lg" viewBox="0 0 48 48" aria-hidden="true"><rect 
 $('#lg').innerHTML=logo('var(--acc)','var(--accf)')+'<h1>BitacObra<small>Bitácora de campo</small></h1>';
 
 /* Datos: se guardan en IndexedDB (aguanta muchas fotos) */
-let S={obra:'',pers:[],rep:[],pen:[],asi:{},ade:[],n:0,f:{fecha:hoy(),clima:'Soleado',act:'',inc:'',fotos:[]}};
+let S={cur:'p1',P:{},emp:'',lgo:'',obra:'',pers:[],rep:[],pen:[],asi:{},ade:[],n:0,f:{fecha:hoy(),clima:'Soleado',act:'',inc:'',fotos:[]}};
 const idb=new Promise(r=>{try{const q=indexedDB.open('bitacobra',1);q.onupgradeneeded=()=>q.result.createObjectStore('s');q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)}catch(e){r(null)}});
 const dbio=async(m,v)=>{const d=await idb;if(!d)return;return new Promise(r=>{const o=d.transaction('s',m=='get'?'readonly':'readwrite').objectStore('s'),q=m=='get'?o.get('S'):o.put(v,'S');q.onsuccess=()=>r(q.result);q.onerror=()=>r()})};
 let tm;const save=()=>{clearTimeout(tm);tm=setTimeout(()=>dbio('put',S),250)};
@@ -113,16 +122,23 @@ const sh=$('#sh');sh.addEventListener('click',e=>{if(e.target===sh)sh.close()});
 const sheet=h=>{sh.innerHTML=h;if(!sh.open)sh.showModal()};
 const form=(t,fl,ok,btn)=>{sheet(`<div class="hh"><span>${t}</span><button class="x" data-c aria-label="Cerrar">✕</button></div><div class="hb">${fl.map(([k,l,ty,ph])=>`<label>${l}<input id="q_${k}" type="${ty||'text'}" ${ty=='number'?'inputmode="decimal" step="any" min="0"':''} placeholder="${ph||''}"></label>`).join('')}<button class="btn" id="qok">${btn||'Guardar'}</button></div>`);
   $('#qok').onclick=()=>{const v={};fl.forEach(([k])=>v[k]=$('#q_'+k).value.trim());if(ok(v)!==false)sh.close()};const i=sh.querySelector('input');if(i)i.focus()};
-const comp=f=>new Promise(res=>{const u=URL.createObjectURL(f),im=new Image();im.onload=()=>{const k=Math.min(1,1200/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL('image/jpeg',.75))};im.onerror=()=>{URL.revokeObjectURL(u);res(null)};im.src=u});
+const comp=(f,M=1200,T='image/jpeg')=>new Promise(res=>{const u=URL.createObjectURL(f),im=new Image();im.onload=()=>{const k=Math.min(1,M/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL(T,.75))};im.onerror=()=>{URL.revokeObjectURL(u);res(null)};im.src=u});
 
+const CAMPOS=['obra','pers','rep','pen','asi','ade','n','f'],blank=()=>({obra:'',pers:[],rep:[],pen:[],asi:{},ade:[],n:0,f:{fecha:hoy(),clima:'Soleado',act:'',inc:'',fotos:[]}}),snap=()=>Object.fromEntries(CAMPOS.map(k=>[k,S[k]]));
+const hdr=()=>{$('#ps').innerHTML=[[S.cur,S.obra],...Object.entries(S.P).map(([k,v])=>[k,v.obra])].map(([k,n])=>`<option value="${k}"${k==S.cur?' selected':''}>${E(n||'Obra sin nombre')}</option>`).join('')};
+const cambiar=id=>{if(id==S.cur||!S.P[id])return;S.P[S.cur]=snap();const n=S.P[id];delete S.P[id];CAMPOS.forEach(k=>S[k]=n[k]);S.cur=id;save();hdr();render();scrollTo(0,0)};
+const dl=(b,n)=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=n;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000)};
+const gaj=()=>{S.obra=$('#s_ob').value.trim();S.emp=$('#s_em').value.trim();save()};
+const ajustes=()=>{sheet(`<div class="hh"><span>Ajustes</span><button class="x" data-c aria-label="Cerrar">✕</button></div><div class="hb"><label>Nombre de la obra<input id="s_ob" value="${E(S.obra)}"></label><label>Empresa o profesional (sale en el membrete del PDF)<input id="s_em" value="${E(S.emp||'')}"></label><label>Logo de la empresa (opcional)<input type="file" id="s_lg" accept="image/*"></label>${S.lgo?`<img src="${S.lgo}" alt="Logo" style="max-height:48px;margin-top:.6rem"><button class="btn g sm" data-a="lgx">Quitar logo</button>`:''}<button class="btn" id="s_ok">Guardar ajustes</button><button class="btn g" data-a="resp">Respaldar datos</button><label class="btn g" style="cursor:pointer;color:var(--acc);font-size:1.05rem;margin-top:.9rem">Restaurar respaldo<input type="file" id="s_rs" accept=".json" hidden></label><button class="btn g" data-a="csv">Exportar nómina de la semana (CSV)</button></div>`);$('#s_ok').onclick=()=>{gaj();sh.close();hdr();render()}};
+const rest=f=>{if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!d.pers||!d.rep)throw 0;if(!confirm('Esto reemplaza todos los datos actuales por los del respaldo. ¿Continuar?'))return;S=Object.assign(S,d);save();sh.close();hdr();render();toast('Respaldo restaurado')}catch(e){toast('El archivo no es un respaldo válido de BitacObra')}};r.readAsText(f)};
 const CLIMA={'Soleado':'☀','Nublado':'☁','Lluvia':'☂'};
 const presentes=f=>S.pers.filter(p=>(S.asi[f]||[]).includes(p.id));
 
 const vDiario=()=>{const f=S.f,pr=presentes(f.fecha);return`<span class="fol">N° ${pad(S.n+1)}</span><h2>Bitácora diaria</h2><p class="mut">Registra lo que pasó hoy en la obra y guárdalo como reporte.</p>
 <section class="hoja"><div class="hh"><span>Día y clima</span></div><div class="hb"><label>Fecha<input type="date" id="fe" value="${f.fecha}"></label><label>Clima</label><div class="chips">${Object.keys(CLIMA).map(c=>`<button class="ch${f.clima==c?' on':''}" data-a="clima" data-i="${c}">${CLIMA[c]} ${c}</button>`).join('')}</div></div></section>
 <section class="hoja"><div class="hh"><span>Personal en obra</span><span>${pr.length} de ${S.pers.length}</span></div><div class="hb">${pr.length?pr.map(p=>`<span class="tag">${E(p.n)}</span>`).join(''):`<p class="mut">${S.pers.length?'Nadie marcado este día.':'Aún no tienes personal registrado.'}</p>`}<button class="btn g sm" data-a="nav" data-i="cuadrilla">${S.pers.length?'Marcar asistencia':'Agregar personal'}</button></div></section>
-<section class="hoja"><div class="hh"><span>Qué se hizo</span></div><div class="hb"><label>Actividades realizadas<textarea data-m="act" placeholder="Ej.: Vaciado de losa nervada, armado de columnas del eje A…">${E(f.act)}</textarea></label><label>Incidentes o retrasos<textarea data-m="inc" style="min-height:80px" placeholder="Ej.: El camión de concreto llegó tarde; la lluvia paró la obra 2 horas…">${E(f.inc)}</textarea></label></div></section>
-<section class="hoja"><div class="hh"><span>Fotos del día</span><span>${f.fotos.length}</span></div><div class="hb"><input type="file" id="fi" accept="image/*" multiple hidden><button class="btn g" style="margin-top:0" data-a="foto">Adjuntar fotos</button>${f.fotos.length?`<div class="ph">${f.fotos.map((p,i)=>`<figure><img src="${p.u}" alt="Foto ${i+1}"><input data-fc="${i}" placeholder="Descripción" value="${E(p.c)}"><button class="x" data-a="fx" data-i="${i}" aria-label="Quitar foto">✕</button></figure>`).join('')}</div>`:''}</div></section>
+<section class="hoja"><div class="hh"><span>Qué se hizo</span></div><div class="hb"><label>Actividades realizadas <button class="x" data-a="mic" data-i="act">🎤 Dictar</button><textarea data-m="act" placeholder="Ej.: Vaciado de losa nervada, armado de columnas del eje A…">${E(f.act)}</textarea></label><label>Incidentes o retrasos <button class="x" data-a="mic" data-i="inc">🎤 Dictar</button><textarea data-m="inc" style="min-height:80px" placeholder="Ej.: El camión de concreto llegó tarde; la lluvia paró la obra 2 horas…">${E(f.inc)}</textarea></label></div></section>
+<section class="hoja"><div class="hh"><span>Fotos del día</span><span>${f.fotos.length}</span></div><div class="hb"><input type="file" id="fi" accept="image/*" multiple hidden><button class="btn g" style="margin-top:0" data-a="foto">Adjuntar fotos</button>${f.fotos.length?`<div class="ph">${f.fotos.map((p,i)=>`<figure><img src="${p.u}" alt="Foto ${i+1}" data-a="zoom" data-i="${i}"><input data-fc="${i}" placeholder="Descripción" value="${E(p.c)}"><button class="x" data-a="fx" data-i="${i}" aria-label="Quitar foto">✕</button></figure>`).join('')}</div>`:''}</div></section>
 <button class="btn" data-a="guardar">Guardar reporte</button>`};
 
 const vCuad=()=>{const f=S.f.fecha,pr=S.asi[f]||[],w=wk(f);return`<h2>Cuadrilla</h2><p class="mut">Asistencia, adelantos y pago de la semana.</p>
@@ -135,13 +151,17 @@ return`<h2>Pendientes</h2><p class="mut">Detalles por corregir antes de entregar
 <section class="hoja"><div class="hh"><span>Nuevo pendiente</span></div><div class="hb"><input id="pt" placeholder="Ej.: Pintar mancha en el pasillo"><label>Responsable<select id="pr"><option value="">Sin asignar</option>${S.pers.map(p=>`<option>${E(p.n)}</option>`).join('')}</select></label><button class="btn" data-a="ap">Agregar pendiente</button></div></section>
 <section class="hoja"><div class="hh"><span>Por resolver</span><span>${ab.length}</span></div>${ab.map(it).join('')||'<p class="hb mut">No hay pendientes abiertos.</p>'}</section>${ce.length?`<section class="hoja"><div class="hh"><span>Corregidos</span><span>${ce.length}</span></div>${ce.map(it).join('')}</section>`:''}`};
 
-const vRep=()=>`<h2>Reportes</h2><p class="mut">Cada reporte guardado se puede ver y exportar a PDF con sus fotos a color.</p>${S.rep.map(r=>`<section class="hoja"><div class="hh"><span>N° ${pad(r.n)}</span><span>${fs(r.fecha)}</span></div><div class="hb"><p><b>${E(r.obra||'Obra sin nombre')}</b> · ${E(r.clima)}</p><p class="mut cl">${E(r.act||r.inc||'Solo registro fotográfico')}</p><small>${r.fotos.length} fotos · ${r.pers.length} personas</small><div><button class="btn sm" data-a="pdf" data-i="${r.id}">Exportar PDF</button><button class="btn g sm" data-a="ver" data-i="${r.id}">Ver</button><button class="btn g sm" data-a="dr" data-i="${r.id}">Eliminar</button></div></div></section>`).join('')||'<section class="hoja"><div class="hb"><p class="mut">Aún no hay reportes. Llena la bitácora y toca «Guardar reporte».</p></div></section>'}`;
+let Q='',QF='';
+const rcard=r=>`<section class="hoja"><div class="hh"><span>N° ${pad(r.n)}</span><span>${fs(r.fecha)}</span></div><div class="hb"><p><b>${E(r.obra||'Obra sin nombre')}</b> · ${E(r.clima)}</p><p class="mut cl">${E(r.act||r.inc||'Solo registro fotográfico')}</p><small>${r.fotos.length} fotos · ${r.pers.length} personas${r.inc?' · con incidentes':''}</small><div><button class="btn sm" data-a="pdf" data-i="${r.id}">Exportar PDF</button><button class="btn g sm" data-a="share" data-i="${r.id}">Compartir</button><button class="btn g sm" data-a="ver" data-i="${r.id}">Ver</button><button class="btn g sm" data-a="dr" data-i="${r.id}">Eliminar</button></div></div></section>`;
+const rlist=()=>{const q=Q.toLowerCase(),L=S.rep.filter(r=>(!q||(r.act+' '+r.inc+' '+r.fecha+' '+r.clima).toLowerCase().includes(q))&&(QF=='inc'?r.inc:QF=='ll'?r.clima=='Lluvia':1));return L.map(rcard).join('')||`<div class="vac"><svg width="76" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 42a22 22 0 0 1 44 0z"/><path d="M6 46h52M28 20v22M36 20v22"/></svg><p>${S.rep.length?'Ningún reporte coincide con la búsqueda.':'Aún no hay reportes. Llena la bitácora y toca «Guardar reporte».'}</p></div>`};
+const vRep=()=>`<h2>Reportes</h2><p class="mut">Cada reporte guardado se puede ver, compartir y exportar a PDF con sus fotos a color.</p><input id="rq" type="search" style="margin-top:1rem" placeholder="Buscar por fecha o palabra…" value="${E(Q)}" aria-label="Buscar reportes"><div class="chips" style="margin-bottom:.4rem"><button class="ch${QF=='inc'?' on':''}" data-a="rf" data-i="inc">Con incidentes</button><button class="ch${QF=='ll'?' on':''}" data-a="rf" data-i="ll">Lluvia</button></div><div id="rl">${rlist()}</div>`;
 
-const doc=r=>`<div class="doc"><div class="dh">${logo('#1D4ED8','#fff')}<div><b>Bitácora de obra</b><span>${E(r.obra||'Obra sin nombre')}</span></div><div class="fo"><small>Folio</small><b>N° ${pad(r.n)}</b></div></div>
-<div class="dm"><div><small>Fecha</small><b>${E(fd(r.fecha))}</b></div><div><small>Clima</small><b>${E(r.clima)}</b></div><div><small>Personal</small><b>${r.pers.length}</b></div></div>
+const doc=r=>`<div class="doc"><table class="dw"><tbody><tr><td>
+<div class="dh">${S.lgo?`<img class="dl" src="${S.lgo}" alt="">`:''}<div class="dt"><b>${E(r.obra||'Obra sin nombre')}</b><span>Bitácora de obra${S.emp?' · '+E(S.emp):''}</span></div><div class="fo"><small>Folio</small><b>N° ${pad(r.n)}</b></div></div>
+<div class="dm"><div><small>Fecha</small><b>${E(fd(r.fecha))}</b></div><div><small>Clima</small><b>${E(r.clima)}</b></div><div><small>Personal en obra</small><b>${r.pers.length}</b></div></div>
 <h4>Actividades realizadas</h4><p>${E(r.act||'Sin registro').replace(/\n/g,'<br>')}</p><h4>Incidentes o retrasos</h4><p>${E(r.inc||'Ninguno').replace(/\n/g,'<br>')}</p><h4>Personal en obra</h4><p>${r.pers.length?r.pers.map(E).join(' · '):'Sin registro'}</p>
 ${r.fotos.length?`<h4>Registro fotográfico (${r.fotos.length})</h4><div class="fg">${r.fotos.map((p,i)=>`<figure><img src="${p.u}" alt=""><figcaption><b>Foto ${i+1}</b>${p.c?' · '+E(p.c):''}</figcaption></figure>`).join('')}</div>`:''}
-<div class="fm"><i></i>Responsable de obra · Firma y/o sello</div></div>`;
+<div class="fm"><i></i>Responsable de obra · Firma y/o sello</div></td></tr></tbody><tfoot><tr><td class="pf">© BitacObra</td></tr></tfoot></table></div>`;
 
 const NAV=[['diario','Diario','<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>'],['rep','Reportes','<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>'],['cuadrilla','Cuadrilla','<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>'],['pen','Pendientes','<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>']];
 let view='diario';
@@ -150,6 +170,15 @@ function render(){const n=S.pen.filter(x=>!x.d).length;$('#app').innerHTML=({dia
 
 const num=v=>parseFloat(String(v).replace(',','.'));
 const A={
+ajustes:()=>ajustes(),
+nobra:()=>{S.P[S.cur]=snap();const b=blank();CAMPOS.forEach(k=>S[k]=b[k]);S.cur=uid();save();hdr();render();ajustes();toast('Obra nueva: ponle nombre')},
+lgx:()=>{gaj();S.lgo='';save();ajustes()},
+resp:()=>dl(new Blob([JSON.stringify(S)],{type:'application/json'}),'bitacobra-respaldo-'+hoy()+'.json'),
+csv:()=>{const w=wk(S.f.fecha),L=[['Obrero','Cargo','Días','Pago diario','Adelantos','A pagar']];S.pers.forEach(p=>{const d=w.filter(x=>(S.asi[x]||[]).includes(p.id)).length,ad=S.ade.filter(q=>q.p==p.id&&w.includes(q.d)).reduce((t,q)=>t+q.m,0);L.push([p.n,p.r,d,p.t,ad,d*p.t-ad])});dl(new Blob(['\ufeff'+L.map(r=>r.map(c=>'"'+String(c??'').replace(/"/g,'""')+'"').join(';')).join('\r\n')],{type:'text/csv'}),'nomina-'+w[0]+'.csv')},
+mic:i=>{const R=window.SpeechRecognition||window.webkitSpeechRecognition;if(!R)return toast('Tu navegador no admite dictado por voz');const r=new R();r.lang='es-VE';r.onresult=e=>{S.f[i]=(S.f[i]?S.f[i]+' ':'')+e.results[0][0].transcript;save();render()};r.onerror=()=>toast('No se pudo dictar. Revisa el permiso del micrófono');r.start();toast('Escuchando… habla ahora')},
+zoom:i=>sheet(`<div style="background:#000;padding:.6rem"><button class="x" data-c style="color:#fff;float:right;font-size:1.4rem" aria-label="Cerrar">✕</button><img src="${S.f.fotos[i].u}" alt="" style="width:100%;display:block;margin-top:2rem"></div>`),
+rf:i=>{QF=QF==i?'':i;render()},
+share:i=>{const r=S.rep.find(x=>x.id==i),t=`Bitácora N° ${pad(r.n)} · ${r.obra||'Obra'}\n${fd(r.fecha)} · ${r.clima}\n\nActividades: ${r.act||'—'}${r.inc?'\n\nIncidentes: '+r.inc:''}`;navigator.share?navigator.share({title:'Bitácora N° '+pad(r.n),text:t}).catch(()=>{}):toast('Tu navegador no permite compartir. Usa Exportar PDF')},
 nav:i=>{view=i;render();scrollTo(0,0)},
 clima:i=>{S.f.clima=i;save();render()},
 foto:()=>$('#fi').click(),
@@ -169,11 +198,11 @@ pdf:i=>{const r=S.rep.find(x=>x.id==i),t0=document.title;sh.close();$('#rp').inn
 dr:i=>{const r=S.rep.find(x=>x.id==i);if(confirm('¿Eliminar el reporte N° '+pad(r.n)+'? No se puede deshacer.')){S.rep=S.rep.filter(x=>x.id!=i);save();render()}}
 };
 document.addEventListener('click',e=>{if(e.target.closest('[data-c]'))return sh.close();const b=e.target.closest('[data-a]');if(b&&A[b.dataset.a])A[b.dataset.a](b.dataset.i,b)});
-document.addEventListener('input',e=>{const t=e.target;if(t.dataset.m)S.f[t.dataset.m]=t.value;else if(t.dataset.fc!=null)S.f.fotos[t.dataset.fc].c=t.value;else if(t.id=='ob')S.obra=t.value;else return;save()});
-document.addEventListener('change',async e=>{const t=e.target;if(t.id=='fe'){S.f.fecha=t.value||hoy();save();render()}
+document.addEventListener('input',e=>{const t=e.target;if(t.id=='rq'){Q=t.value;$('#rl').innerHTML=rlist();return}if(t.dataset.m)S.f[t.dataset.m]=t.value;else if(t.dataset.fc!=null)S.f.fotos[t.dataset.fc].c=t.value;else if(t.id=='ob')S.obra=t.value;else return;save()});
+document.addEventListener('change',async e=>{const t=e.target;if(t.id=='ps')cambiar(t.value);else if(t.id=='s_lg'){const f=t.files[0];if(f){gaj();const u=await comp(f,400,'image/png');if(u){S.lgo=u;save();ajustes()}}}else if(t.id=='s_rs')rest(t.files[0]);else if(t.id=='fe'){S.f.fecha=t.value||hoy();save();render()}
   else if(t.id=='fi'){const fl=[...t.files];t.value='';toast('Procesando fotos…');for(const f of fl){const u=await comp(f);if(u)S.f.fotos.push({u,c:''});else toast('No se pudo leer una de las imágenes')}save();render()}});
 
-(async()=>{const d=await dbio('get');if(d){S=Object.assign(S,d);if(!S.f||!Array.isArray(S.f.fotos))S.f={fecha:hoy(),clima:'Soleado',act:'',inc:'',fotos:[]}}$('#ob').value=S.obra||'';render()})();
+(async()=>{const d=await dbio('get');if(d){S=Object.assign(S,d);if(!S.f||!Array.isArray(S.f.fotos))S.f={fecha:hoy(),clima:'Soleado',act:'',inc:'',fotos:[]}}hdr();render()})();
 let dip;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dip=e;$('#ins').hidden=false});
 $('#ins').onclick=async()=>{if(!dip)return;dip.prompt();await dip.userChoice;dip=null;$('#ins').hidden=true};
 addEventListener('appinstalled',()=>{$('#ins').hidden=true;toast('BitacObra instalada')});
