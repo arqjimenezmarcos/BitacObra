@@ -3,266 +3,176 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0D47A1">
-<title>BitacObra · Control de Campo</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#16213A">
+<title>BitacObra · Bitácora de campo</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 <style>
-/* Modo Claro (Azules, Negros, Blanco y Beige Crema) */
-:root {
-  --bg: #F4F1EA;       
-  --bg2: #FFFFFF;      
-  --fg: #0F1115;       
-  --mut: #545F71;      
-  --acc: #0D47A1;      
-  --accf: #FFFFFF;     
-  --line: #E2DCD0;     
-  --inbg: #FFFFFF;     
-  --inb: #C7C1B5;      
-  box-sizing: border-box;
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-/* Modo Oscuro Corporativo */
-[data-theme=dark] {
-  --bg: #0B0D12;       /* Fondo súper oscuro (casi negro) */
-  --bg2: #161A23;      /* Tarjetas oscuras */
-  --fg: #E6E1D6;       /* Texto claro (beige suavizado) */
-  --mut: #8B95A5;      /* Texto secundario gris */
-  --acc: #3B82F6;      /* Azul más brillante para contrastar en oscuro */
-  --accf: #FFFFFF;
-  --line: #262D3D;     /* Líneas oscuras */
-  --inbg: #0B0D12;
-  --inb: #262D3D;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-body { font: 400 16px/1.5 'Outfit', system-ui, sans-serif; background: var(--bg); color: var(--fg); max-width: 800px; margin: 0 auto; min-height: 100vh; padding: 0 1.2rem 6rem; transition: background 0.3s, color 0.3s; }
-button, input, select, textarea { font: inherit; color: inherit; }
-
-header { position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); padding: .8rem 0 .3rem; z-index: 5; border-bottom: 1px solid var(--line); margin-bottom: 1rem; transition: background 0.3s; }
-.top { display: flex; justify-content: space-between; align-items: center; gap: .6rem; }
-h1 { font-size: 1.45rem; font-weight: 600; } 
-h1 small { display: block; font-size: .8rem; font-weight: 300; color: var(--mut); }
-h2 { font-size: 1.4rem; font-weight: 600; margin: .6rem 0; color: var(--acc); }
-h3 { font-size: 1.1rem; font-weight: 600; margin: 1.2rem 0 .5rem; }
-.mut { color: var(--mut); }
-
-.brand { display: flex; align-items: center; gap: .6rem; flex: 1; }
-.lg { width: 34px; height: 34px; flex: none; }
-
-/* Botón de Tema */
-.ib { background: none; border: 1.5px solid var(--line); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; flex: none; display: flex; align-items: center; justify-content: center; color: var(--fg); transition: all 0.2s; }
-.ib:active { background: var(--line); }
-
-/* Navegación inferior tipo app */
-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 800px; display: flex; background: var(--bg2); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom, 0px); z-index: 10; transition: background 0.3s; }
-nav button { flex: 1; background: none; border: 0; padding: 1rem .3rem; cursor: pointer; color: var(--mut); font-weight: 500; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.85rem; transition: color 0.2s; }
-nav button.on { color: var(--acc); font-weight: 600; box-shadow: inset 0 4px var(--acc); }
-nav svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-/* Formularios y Tarjetas */
-input, select, textarea { width: 100%; padding: .75rem 1rem; background: var(--inbg); border: 1.5px solid var(--inb); border-radius: 8px; margin: .3rem 0 .6rem; font-size: 1.05rem; font-weight: 500; transition: background 0.3s, border 0.3s; }
-textarea { resize: vertical; min-height: 100px; }
-:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
-
-.btn { display: block; width: 100%; padding: .95rem; margin-top: 1rem; background: var(--acc); color: var(--accf); border: 1.5px solid var(--acc); cursor: pointer; font-weight: 500; border-radius: 8px; text-align: center; transition: opacity 0.2s, background 0.3s; }
-.btn:active { opacity: 0.8; }
-.btn.ghost { background: none; color: var(--acc); }
-
-.card { background: var(--bg2); border: 1.5px solid var(--line); border-left: 4px solid var(--acc); padding: 1rem; border-radius: 10px; margin-bottom: .8rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: background 0.3s, border 0.3s; }
-.card-header { display: flex; justify-content: space-between; align-items: flex-start; }
-.chk { display: flex; align-items: center; gap: .8rem; font-size: 1.05rem; font-weight: 500; cursor: pointer; padding: .5rem 0; }
-.chk input[type="checkbox"] { width: 22px; height: 22px; margin: 0; accent-color: var(--acc); }
-
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
-.chip-group { display: flex; gap: .5rem; margin: .5rem 0; flex-wrap: wrap; }
-.chip { padding: .4rem 1rem; border: 1.5px solid var(--inb); border-radius: 99px; background: var(--bg2); cursor: pointer; font-weight: 500; color: var(--fg); transition: all 0.2s; }
-.chip.on { background: var(--acc); color: var(--accf); border-color: var(--acc); }
+:root{--bg:#E4E5E1;--bg2:#F7F7F5;--tint:#EDEEEA;--fg:#1B2430;--mut:#5E6773;--acc:#1D4ED8;--accf:#fff;--line:#CBCDC7;--sig:#F26A21;--hd:#16213A;--cd:'Barlow Condensed','Arial Narrow',sans-serif}
+[data-theme=dark]{--bg:#12161C;--bg2:#1B2129;--tint:#161C24;--fg:#E8EAEE;--mut:#98A1AD;--acc:#6EA0FF;--accf:#10151C;--line:#2B333E;--hd:#0C1016}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font:400 16px/1.5 Barlow,system-ui,sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;padding-bottom:calc(5.5rem + env(safe-area-inset-bottom,0px))}
+.in{max-width:800px;margin:0 auto;padding:0 1.1rem}
+button,input,select,textarea{font:inherit;color:inherit}
+header{position:sticky;top:0;z-index:5;background:var(--hd);color:#fff;padding-top:env(safe-area-inset-top,0px)}
+.top{display:flex;align-items:center;gap:.7rem;padding-top:.7rem}
+.brand{display:flex;align-items:center;gap:.65rem;flex:1}.lg{width:40px;height:40px;flex:none}
+h1{font:700 1.7rem/1 var(--cd);letter-spacing:.02em}h1 small{display:block;font:400 .8rem/1.3 Barlow;opacity:.7;letter-spacing:0}
+.ib{width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(255,255,255,.35);background:none;color:#fff;font-size:1.15rem;cursor:pointer}
+.obr{padding:.6rem 0 .75rem}.obr input{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.25);color:#fff;margin:0;padding:.5rem .8rem}.obr input::placeholder{color:rgba(255,255,255,.6)}
+.tape{height:6px;background:repeating-linear-gradient(-45deg,var(--sig) 0 10px,#111 10px 20px)}
+main{padding-top:1.2rem}
+h2{font:700 2.1rem/1.05 var(--cd);margin:.5rem 0 .3rem}
+.mut,small{color:var(--mut)}
+.fol{display:inline-block;border:2px solid var(--sig);color:var(--sig);border-radius:4px;padding:.05rem .6rem;font:700 1.35rem/1.3 var(--cd);letter-spacing:.05em;transform:rotate(-2deg)}
+.hoja{background:var(--bg2);border:1px solid var(--line);border-left:5px solid var(--acc);border-radius:6px;margin:1rem 0}
+.hh{display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.55rem .9rem;border-bottom:1px solid var(--line);background:var(--tint);border-radius:0 6px 0 0;font:600 1.25rem/1.2 var(--cd)}
+.hh span+span{font:500 .9rem Barlow;color:var(--mut)}
+.hb{padding:.8rem .9rem}.hb>p+p{margin-top:.3rem}
+label{display:block;font-weight:500;font-size:.92rem;color:var(--mut);margin-top:.75rem}
+input,select,textarea{width:100%;padding:.65rem .8rem;background:var(--bg);border:1.5px solid var(--line);border-radius:4px;margin-top:.25rem;color:var(--fg);font-size:1rem}
+textarea{min-height:110px;resize:vertical}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+input[type=checkbox]{width:24px;height:24px;margin:0;accent-color:var(--acc);flex:none}
+.btn{display:block;width:100%;padding:.8rem;margin-top:.9rem;background:var(--acc);color:var(--accf);border:1.5px solid var(--acc);border-radius:4px;font-weight:600;font-size:1.05rem;cursor:pointer;text-align:center}
+.btn:active{transform:translateY(1px);opacity:.85}.btn.g{background:none;color:var(--acc)}.btn.sm{display:inline-block;width:auto;padding:.4rem .9rem;margin:.5rem .4rem 0 0;font-size:.92rem}
+.x{background:none;border:0;color:var(--mut);font-size:1.1rem;cursor:pointer;padding:.3rem .5rem}
+.chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.35rem}
+.ch{padding:.5rem 1rem;border:1.5px solid var(--line);background:var(--bg);border-radius:4px;font-weight:500;cursor:pointer}.ch.on{background:var(--acc);color:var(--accf);border-color:var(--acc)}
+.tag{display:inline-block;background:var(--tint);border:1px solid var(--line);border-radius:4px;padding:.15rem .6rem;margin:0 .4rem .4rem 0;font-weight:500}
+.ph{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.7rem;margin-top:.7rem}
+.ph figure{position:relative;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--bg)}.ph img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.ph input{margin:0;border:0;border-top:1px solid var(--line);border-radius:0;font-size:.88rem;padding:.4rem .5rem}
+.ph .x{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.65);color:#fff;border-radius:50%;width:28px;height:28px;padding:0}
+.row{display:flex;align-items:center;flex-wrap:wrap;gap:.2rem .7rem;padding:.75rem .9rem;border-bottom:1px solid var(--line)}.row:last-child{border:0}
+.fl{flex:1 1 150px;display:flex;flex-direction:column}.tc{text-decoration:line-through;opacity:.55}
+.av{width:40px;height:40px;border-radius:4px;background:var(--acc);color:var(--accf);display:grid;place-items:center;font:700 1.3rem var(--cd)}
+.sw{display:flex;align-items:center;gap:.4rem;margin:0;color:var(--fg);cursor:pointer}
+.cl{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}.g2 .btn{margin-top:0}
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);z-index:10}
+nav .in{display:flex;padding:0}
+nav button{flex:1;position:relative;background:none;border:0;padding:.7rem .2rem .6rem;cursor:pointer;color:var(--mut);font-weight:500;font-size:.82rem;display:flex;flex-direction:column;align-items:center;gap:3px}
+nav button.on{color:var(--acc);font-weight:600;box-shadow:inset 0 3px var(--acc)}
+nav svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bd{position:absolute;top:5px;left:calc(50% + 6px);background:var(--sig);color:#fff;font:600 .7rem/1 Barlow;border-radius:99px;padding:3px 6px;font-style:normal}
+dialog{border:1px solid var(--line);border-left:5px solid var(--acc);border-radius:6px;background:var(--bg2);color:var(--fg);width:min(94vw,520px);max-height:88vh;overflow:auto;margin:auto;padding:0}
+dialog::backdrop{background:rgba(8,12,18,.65)}
+table{width:100%;border-collapse:collapse;margin-top:.6rem}th,td{text-align:right;padding:.4rem .3rem;border-bottom:1px solid var(--line);font-size:.92rem}th:first-child,td:first-child{text-align:left}
+#ts{position:fixed;left:50%;bottom:calc(5.5rem + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);background:var(--fg);color:var(--bg);padding:.6rem 1.1rem;border-radius:4px;font-weight:500;opacity:0;pointer-events:none;transition:.25s;z-index:30}#ts.on{opacity:1;transform:translate(-50%,0)}
+/* Documento del reporte (pantalla e impresión) */
+#rp{display:none}
+.doc{background:#fff;color:#16213A;padding:1rem;font-size:13px;line-height:1.45}
+.dh{display:flex;align-items:center;gap:.7rem;border-bottom:3px solid #16213A;padding-bottom:.6rem}.dh>div:nth-child(2){flex:1}.dh b{display:block;font:700 1.5rem/1 var(--cd)}.dh span{color:#444}
+.fo{text-align:right}.fo b{color:#F26A21;font-size:1.6rem}.fo small{display:block;color:#555}
+.dm{display:grid;grid-template-columns:2fr 1fr 1fr;gap:.6rem;padding:.6rem 0;border-bottom:1px solid #bbb}.dm small{display:block;color:#555}
+.doc h4{font:700 1.15rem var(--cd);margin:.9rem 0 .2rem;border-bottom:1px solid #16213A}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}.fg figure{break-inside:avoid;border:1px solid #bbb}.fg img{display:block;width:100%;max-height:75mm;object-fit:contain;background:#f2f2f2}.fg figcaption{padding:.25rem .4rem;font-size:11px;border-top:1px solid #bbb}
+.fm{margin:2.5rem auto 0;width:60%;text-align:center;break-inside:avoid}.fm i{display:block;border-top:1.5px solid #16213A;margin-bottom:.2rem}
+@page{size:A4;margin:12mm}
+@media print{*{-webkit-print-color-adjust:exact;print-color-adjust:exact}body>*:not(#rp){display:none!important}body{background:#fff;padding:0}#rp{display:block}.doc{padding:0}}
 </style>
 </head>
 <body>
-
 <header>
-  <div class="top">
-    <div class="brand">
-      <svg class="lg" viewBox="0 0 400 400" aria-hidden="true">
-        <rect width="400" height="400" rx="88" fill="var(--acc)"/>
-        <path d="M 120 140 L 120 300 A 20 20 0 0 0 140 320 L 260 320 A 20 20 0 0 0 280 300 L 280 140" fill="none" stroke="var(--accf)" stroke-width="32" stroke-linecap="round"/>
-        <line x1="160" y1="100" x2="240" y2="100" stroke="var(--accf)" stroke-width="40" stroke-linecap="round"/>
-        <line x1="160" y1="200" x2="240" y2="200" stroke="var(--accf)" stroke-width="24" stroke-linecap="round"/>
-        <line x1="160" y1="260" x2="210" y2="260" stroke="var(--accf)" stroke-width="24" stroke-linecap="round"/>
-      </svg>
-      <h1>BitacObra<small>Control de Campo</small></h1>
-    </div>
-    <!-- Botón de Modo Oscuro/Claro -->
-    <button class="ib" id="th" aria-label="Cambiar modo claro u oscuro">◐</button>
+  <div class="in top">
+    <div class="brand" id="lg"></div>
+    <button class="ib" id="th" aria-label="Cambiar entre modo claro y oscuro">◐</button>
   </div>
+  <div class="in obr"><input id="ob" placeholder="Nombre de la obra (sale en cada reporte)" aria-label="Nombre de la obra"></div>
+  <div class="tape"></div>
 </header>
-
-<main id="app"></main>
-
-<nav id="nav">
-  <button data-v="diario" class="on">
-    <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-    Diario
-  </button>
-  <button data-v="cuadrilla">
-    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-    Cuadrilla
-  </button>
-  <button data-v="punch">
-    <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
-    Pendientes
-  </button>
-</nav>
+<main id="app" class="in"></main>
+<nav id="nav"><div class="in"></div></nav>
+<dialog id="sh"></dialog>
+<div id="rp"></div>
+<div id="ts" role="status"></div>
 
 <script>
-const $ = s => document.querySelector(s);
-const get = k => { try { return localStorage.getItem(k) } catch (e) { return null } };
-const set = (k, x) => { try { localStorage.setItem(k, x) } catch (e) {} };
+const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const get=k=>{try{return localStorage.getItem(k)}catch(e){return null}},set=(k,x)=>{try{localStorage.setItem(k,x)}catch(e){}};
+const z=n=>String(n).padStart(2,'0'),ymd=d=>d.getFullYear()+'-'+z(d.getMonth()+1)+'-'+z(d.getDate()),hoy=()=>ymd(new Date()),pad=n=>String(n).padStart(4,'0');
+const fd=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d).toLocaleDateString('es',{weekday:'long',day:'numeric',month:'long',year:'numeric'})},fs=s=>s.split('-').reverse().join('/');
+const money=n=>'$'+(Math.round(n*100)/100).toLocaleString('es',{minimumFractionDigits:2,maximumFractionDigits:2});
+const wk=s=>{const[y,m,d]=s.split('-').map(Number),dw=(new Date(y,m-1,d).getDay()+6)%7;return[0,1,2,3,4,5,6].map(i=>ymd(new Date(y,m-1,d-dw+i)))};
+const logo=(a,b)=>`<svg class="lg" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="7" fill="${a}"/><path d="M24 6v6" stroke="${b}" stroke-width="3" stroke-linecap="round"/><rect x="7" y="17" width="34" height="14" rx="7" fill="none" stroke="${b}" stroke-width="3"/><path d="M17 20.5v7M31 20.5v7" stroke="${b}" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="24" r="3.6" fill="${b}"/><path d="M7 39h34M7 39v-3M15 39v-2M24 39v-3M33 39v-2M41 39v-3" stroke="${b}" stroke-width="2" stroke-linecap="round"/></svg>`;
+$('#lg').innerHTML=logo('var(--acc)','var(--accf)')+'<h1>BitacObra<small>Bitácora de campo</small></h1>';
 
-// Lógica de Modo Claro/Oscuro
-let dk = get('bo_t') ? get('bo_t') == 'd' : matchMedia('(prefers-color-scheme:dark)').matches;
-const theme = () => { 
-  document.documentElement.dataset.theme = dk ? 'dark' : 'light'; 
-  set('bo_t', dk ? 'd' : 'l');
-  // Actualizar el meta theme-color para el navegador del celular
-  $('meta[name="theme-color"]').setAttribute("content", dk ? "#0B0D12" : "#0D47A1");
+/* Datos: se guardan en IndexedDB (aguanta muchas fotos) */
+let S={obra:'',pers:[],rep:[],pen:[],asi:{},ade:[],n:0,f:{fecha:hoy(),clima:'Soleado',act:'',inc:'',fotos:[]}};
+const idb=new Promise(r=>{try{const q=indexedDB.open('bitacobra',1);q.onupgradeneeded=()=>q.result.createObjectStore('s');q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)}catch(e){r(null)}});
+const dbio=async(m,v)=>{const d=await idb;if(!d)return;return new Promise(r=>{const o=d.transaction('s',m=='get'?'readonly':'readwrite').objectStore('s'),q=m=='get'?o.get('S'):o.put(v,'S');q.onsuccess=()=>r(q.result);q.onerror=()=>r()})};
+let tm;const save=()=>{clearTimeout(tm);tm=setTimeout(()=>dbio('put',S),250)};
+
+let dk=get('bo_t')?get('bo_t')=='d':matchMedia('(prefers-color-scheme:dark)').matches;
+const theme=()=>{document.documentElement.dataset.theme=dk?'dark':'light';set('bo_t',dk?'d':'l');$('meta[name=theme-color]').content=dk?'#0C1016':'#16213A'};
+theme();$('#th').onclick=()=>{dk=!dk;theme()};
+
+const toast=m=>{const t=$('#ts');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2300)};
+const sh=$('#sh');sh.addEventListener('click',e=>{if(e.target===sh)sh.close()});
+const sheet=h=>{sh.innerHTML=h;if(!sh.open)sh.showModal()};
+const form=(t,fl,ok,btn)=>{sheet(`<div class="hh"><span>${t}</span><button class="x" data-c aria-label="Cerrar">✕</button></div><div class="hb">${fl.map(([k,l,ty,ph])=>`<label>${l}<input id="q_${k}" type="${ty||'text'}" ${ty=='number'?'inputmode="decimal" step="any" min="0"':''} placeholder="${ph||''}"></label>`).join('')}<button class="btn" id="qok">${btn||'Guardar'}</button></div>`);
+  $('#qok').onclick=()=>{const v={};fl.forEach(([k])=>v[k]=$('#q_'+k).value.trim());if(ok(v)!==false)sh.close()};const i=sh.querySelector('input');if(i)i.focus()};
+const comp=f=>new Promise(res=>{const u=URL.createObjectURL(f),im=new Image();im.onload=()=>{const k=Math.min(1,1200/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL('image/jpeg',.75))};im.onerror=()=>{URL.revokeObjectURL(u);res(null)};im.src=u});
+
+const CLIMA={'Soleado':'☀','Nublado':'☁','Lluvia':'☂'};
+const presentes=f=>S.pers.filter(p=>(S.asi[f]||[]).includes(p.id));
+
+const vDiario=()=>{const f=S.f,pr=presentes(f.fecha);return`<span class="fol">N° ${pad(S.n+1)}</span><h2>Bitácora diaria</h2><p class="mut">Registra lo que pasó hoy en la obra y guárdalo como reporte.</p>
+<section class="hoja"><div class="hh"><span>Día y clima</span></div><div class="hb"><label>Fecha<input type="date" id="fe" value="${f.fecha}"></label><label>Clima</label><div class="chips">${Object.keys(CLIMA).map(c=>`<button class="ch${f.clima==c?' on':''}" data-a="clima" data-i="${c}">${CLIMA[c]} ${c}</button>`).join('')}</div></div></section>
+<section class="hoja"><div class="hh"><span>Personal en obra</span><span>${pr.length} de ${S.pers.length}</span></div><div class="hb">${pr.length?pr.map(p=>`<span class="tag">${E(p.n)}</span>`).join(''):`<p class="mut">${S.pers.length?'Nadie marcado este día.':'Aún no tienes personal registrado.'}</p>`}<button class="btn g sm" data-a="nav" data-i="cuadrilla">${S.pers.length?'Marcar asistencia':'Agregar personal'}</button></div></section>
+<section class="hoja"><div class="hh"><span>Qué se hizo</span></div><div class="hb"><label>Actividades realizadas<textarea data-m="act" placeholder="Ej.: Vaciado de losa nervada, armado de columnas del eje A…">${E(f.act)}</textarea></label><label>Incidentes o retrasos<textarea data-m="inc" style="min-height:80px" placeholder="Ej.: El camión de concreto llegó tarde; la lluvia paró la obra 2 horas…">${E(f.inc)}</textarea></label></div></section>
+<section class="hoja"><div class="hh"><span>Fotos del día</span><span>${f.fotos.length}</span></div><div class="hb"><input type="file" id="fi" accept="image/*" multiple hidden><button class="btn g" style="margin-top:0" data-a="foto">Adjuntar fotos</button>${f.fotos.length?`<div class="ph">${f.fotos.map((p,i)=>`<figure><img src="${p.u}" alt="Foto ${i+1}"><input data-fc="${i}" placeholder="Descripción" value="${E(p.c)}"><button class="x" data-a="fx" data-i="${i}" aria-label="Quitar foto">✕</button></figure>`).join('')}</div>`:''}</div></section>
+<button class="btn" data-a="guardar">Guardar reporte</button>`};
+
+const vCuad=()=>{const f=S.f.fecha,pr=S.asi[f]||[],w=wk(f);return`<h2>Cuadrilla</h2><p class="mut">Asistencia, adelantos y pago de la semana.</p>
+<div class="g2" style="margin-top:1rem"><button class="btn" data-a="apers">Agregar obrero</button><button class="btn g" data-a="sab">Cálculo del sábado</button></div>
+<label>Asistencia del día<input type="date" id="fe" value="${f}"></label>
+<section class="hoja"><div class="hh"><span>Personal</span><span>${pr.length} presentes</span></div>${S.pers.map(p=>{const ad=S.ade.filter(a=>a.p==p.id&&w.includes(a.d)).reduce((s,a)=>s+a.m,0);return`<div class="row"><span class="av">${E((p.n[0]||'?').toUpperCase())}</span><div class="fl"><b>${E(p.n)}</b><small>${E(p.r||'Sin cargo')} · ${money(p.t)} por día${ad?` · adelantos ${money(ad)}`:''}</small></div><button class="btn g sm" style="margin:0" data-a="ad" data-i="${p.id}">Adelanto</button><label class="sw"><input type="checkbox" data-a="asi" data-i="${p.id}"${pr.includes(p.id)?' checked':''}>Asistió</label><button class="x" data-a="dpe" data-i="${p.id}" aria-label="Quitar a ${E(p.n)}">✕</button></div>`}).join('')||'<p class="hb mut">Toca «Agregar obrero» para registrar a tu primera persona.</p>'}</section>`};
+
+const vPen=()=>{const ab=S.pen.filter(x=>!x.d),ce=S.pen.filter(x=>x.d),it=x=>`<div class="row"><input type="checkbox" data-a="tp" data-i="${x.id}"${x.d?' checked':''} aria-label="Marcar corregido"><div class="fl"><span${x.d?' class="tc"':''}>${E(x.t)}</span><small>${E(x.r||'Sin asignar')} · ${fs(x.f)}</small></div><button class="x" data-a="dp" data-i="${x.id}" aria-label="Eliminar">✕</button></div>`;
+return`<h2>Pendientes</h2><p class="mut">Detalles por corregir antes de entregar la obra.</p>
+<section class="hoja"><div class="hh"><span>Nuevo pendiente</span></div><div class="hb"><input id="pt" placeholder="Ej.: Pintar mancha en el pasillo"><label>Responsable<select id="pr"><option value="">Sin asignar</option>${S.pers.map(p=>`<option>${E(p.n)}</option>`).join('')}</select></label><button class="btn" data-a="ap">Agregar pendiente</button></div></section>
+<section class="hoja"><div class="hh"><span>Por resolver</span><span>${ab.length}</span></div>${ab.map(it).join('')||'<p class="hb mut">No hay pendientes abiertos.</p>'}</section>${ce.length?`<section class="hoja"><div class="hh"><span>Corregidos</span><span>${ce.length}</span></div>${ce.map(it).join('')}</section>`:''}`};
+
+const vRep=()=>`<h2>Reportes</h2><p class="mut">Cada reporte guardado se puede ver y exportar a PDF con sus fotos a color.</p>${S.rep.map(r=>`<section class="hoja"><div class="hh"><span>N° ${pad(r.n)}</span><span>${fs(r.fecha)}</span></div><div class="hb"><p><b>${E(r.obra||'Obra sin nombre')}</b> · ${E(r.clima)}</p><p class="mut cl">${E(r.act||r.inc||'Solo registro fotográfico')}</p><small>${r.fotos.length} fotos · ${r.pers.length} personas</small><div><button class="btn sm" data-a="pdf" data-i="${r.id}">Exportar PDF</button><button class="btn g sm" data-a="ver" data-i="${r.id}">Ver</button><button class="btn g sm" data-a="dr" data-i="${r.id}">Eliminar</button></div></div></section>`).join('')||'<section class="hoja"><div class="hb"><p class="mut">Aún no hay reportes. Llena la bitácora y toca «Guardar reporte».</p></div></section>'}`;
+
+const doc=r=>`<div class="doc"><div class="dh">${logo('#1D4ED8','#fff')}<div><b>Bitácora de obra</b><span>${E(r.obra||'Obra sin nombre')}</span></div><div class="fo"><small>Folio</small><b>N° ${pad(r.n)}</b></div></div>
+<div class="dm"><div><small>Fecha</small><b>${E(fd(r.fecha))}</b></div><div><small>Clima</small><b>${E(r.clima)}</b></div><div><small>Personal</small><b>${r.pers.length}</b></div></div>
+<h4>Actividades realizadas</h4><p>${E(r.act||'Sin registro').replace(/\n/g,'<br>')}</p><h4>Incidentes o retrasos</h4><p>${E(r.inc||'Ninguno').replace(/\n/g,'<br>')}</p><h4>Personal en obra</h4><p>${r.pers.length?r.pers.map(E).join(' · '):'Sin registro'}</p>
+${r.fotos.length?`<h4>Registro fotográfico (${r.fotos.length})</h4><div class="fg">${r.fotos.map((p,i)=>`<figure><img src="${p.u}" alt=""><figcaption><b>Foto ${i+1}</b>${p.c?' · '+E(p.c):''}</figcaption></figure>`).join('')}</div>`:''}
+<div class="fm"><i></i>Responsable de obra · Firma y/o sello</div></div>`;
+
+const NAV=[['diario','Diario','<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>'],['rep','Reportes','<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>'],['cuadrilla','Cuadrilla','<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>'],['pen','Pendientes','<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>']];
+let view='diario';
+function render(){const n=S.pen.filter(x=>!x.d).length;$('#app').innerHTML=({diario:vDiario,rep:vRep,cuadrilla:vCuad,pen:vPen})[view]();
+  $('#nav .in').innerHTML=NAV.map(([k,l,p])=>`<button data-a="nav" data-i="${k}"${view==k?' class="on" aria-current="page"':''}><svg viewBox="0 0 24 24">${p}</svg>${l}${k=='pen'&&n?`<i class="bd">${n}</i>`:''}</button>`).join('')}
+
+const num=v=>parseFloat(String(v).replace(',','.'));
+const A={
+nav:i=>{view=i;render();scrollTo(0,0)},
+clima:i=>{S.f.clima=i;save();render()},
+foto:()=>$('#fi').click(),
+fx:i=>{S.f.fotos.splice(i,1);save();render()},
+guardar:()=>{const f=S.f;if(!f.act.trim()&&!f.inc.trim()&&!f.fotos.length)return toast('Escribe las actividades o adjunta una foto');S.n++;S.rep.unshift({id:uid(),n:S.n,fecha:f.fecha,clima:f.clima,act:f.act.trim(),inc:f.inc.trim(),fotos:f.fotos,pers:presentes(f.fecha).map(p=>p.n+(p.r?' ('+p.r+')':'')),obra:S.obra,t:Date.now()});toast('Reporte N° '+pad(S.n)+' guardado');S.f={fecha:hoy(),clima:f.clima,act:'',inc:'',fotos:[]};save();A.nav('rep')},
+apers:()=>form('Agregar obrero',[['n','Nombre y apellido','text','Ej.: Juan Pérez'],['r','Cargo','text','Ej.: Maestro de obra'],['t','Pago diario (US$)','number','30']],v=>{if(!v.n){toast('Escribe el nombre');return false}S.pers.push({id:uid(),n:v.n,r:v.r,t:num(v.t)||0});save();toast(v.n+' agregado');render()}),
+dpe:i=>{const p=S.pers.find(x=>x.id==i);if(p&&confirm('¿Quitar a '+p.n+' de la cuadrilla? Los reportes ya guardados no cambian.')){S.pers=S.pers.filter(x=>x.id!=i);save();render()}},
+asi:i=>{const a=S.asi[S.f.fecha]||(S.asi[S.f.fecha]=[]),k=a.indexOf(i);k<0?a.push(i):a.splice(k,1);save();render()},
+ad:i=>form('Adelanto',[['m','Monto (US$)','number','0.00']],v=>{const m=num(v.m);if(!(m>0)){toast('Escribe un monto mayor a cero');return false}S.ade.push({p:i,d:S.f.fecha,m});save();toast('Adelanto registrado');render()}),
+sab:()=>{const w=wk(S.f.fecha);let T=0;const rows=S.pers.map(p=>{const d=w.filter(x=>(S.asi[x]||[]).includes(p.id)).length,ad=S.ade.filter(a=>a.p==p.id&&w.includes(a.d)).reduce((s,a)=>s+a.m,0),pg=d*p.t-ad;T+=pg;return`<tr><td>${E(p.n)}</td><td>${d}</td><td>${money(p.t)}</td><td>${money(ad)}</td><td><b>${money(pg)}</b></td></tr>`}).join('');
+  sheet(`<div class="hh"><span>Cálculo del sábado</span><button class="x" data-c aria-label="Cerrar">✕</button></div><div class="hb"><small>Semana del ${fs(w[0]).slice(0,5)} al ${fs(w[5]).slice(0,5)}: días asistidos × pago diario − adelantos</small>${S.pers.length?`<table><thead><tr><th>Obrero</th><th>Días</th><th>Pago</th><th>Adelantos</th><th>A pagar</th></tr></thead><tbody>${rows}</tbody><tfoot><tr><td colspan="4"><b>Total</b></td><td><b>${money(T)}</b></td></tr></tfoot></table>`:'<p class="mut" style="margin-top:.6rem">Agrega personal para calcular el pago.</p>'}<button class="btn g" data-c>Cerrar</button></div>`)},
+ap:()=>{const t=$('#pt').value.trim();if(!t){toast('Escribe el pendiente');return $('#pt').focus()}S.pen.unshift({id:uid(),t,r:$('#pr').value,f:hoy(),d:0});save();render()},
+tp:i=>{const x=S.pen.find(y=>y.id==i);x.d=x.d?0:1;save();render()},
+dp:i=>{S.pen=S.pen.filter(x=>x.id!=i);save();render()},
+ver:i=>sheet(`<div class="hb" style="padding:.4rem"><button class="x" data-c style="float:right" aria-label="Cerrar">✕</button>${doc(S.rep.find(r=>r.id==i))}<button class="btn" data-a="pdf" data-i="${i}">Exportar PDF</button></div>`),
+pdf:i=>{const r=S.rep.find(x=>x.id==i),t0=document.title;sh.close();$('#rp').innerHTML=doc(r);document.title='BitacObra N° '+pad(r.n)+' - '+r.fecha;addEventListener('afterprint',()=>{document.title=t0;$('#rp').innerHTML=''},{once:true});setTimeout(()=>print(),150)},
+dr:i=>{const r=S.rep.find(x=>x.id==i);if(confirm('¿Eliminar el reporte N° '+pad(r.n)+'? No se puede deshacer.')){S.rep=S.rep.filter(x=>x.id!=i);save();render()}}
 };
-theme();
-$('#th').onclick = () => { dk = !dk; theme(); };
+document.addEventListener('click',e=>{if(e.target.closest('[data-c]'))return sh.close();const b=e.target.closest('[data-a]');if(b&&A[b.dataset.a])A[b.dataset.a](b.dataset.i,b)});
+document.addEventListener('input',e=>{const t=e.target;if(t.dataset.m)S.f[t.dataset.m]=t.value;else if(t.dataset.fc!=null)S.f.fotos[t.dataset.fc].c=t.value;else if(t.id=='ob')S.obra=t.value;else return;save()});
+document.addEventListener('change',async e=>{const t=e.target;if(t.id=='fe'){S.f.fecha=t.value||hoy();save();render()}
+  else if(t.id=='fi'){const fl=[...t.files];t.value='';toast('Procesando fotos…');for(const f of fl){const u=await comp(f);if(u)S.f.fotos.push({u,c:''});else toast('No se pudo leer una de las imágenes')}save();render()}});
 
-let view = 'diario';
-
-function render() {
-  document.querySelectorAll('#nav button').forEach(b => {
-    b.classList.toggle('on', b.dataset.v === view);
-    b.onclick = () => { view = b.dataset.v; render(); };
-  });
-
-  const app = $('#app');
-  
-  if (view === 'diario') {
-    app.innerHTML = `
-      <h2>Bitácora Diaria</h2>
-      <p class="mut">Registra las actividades y condiciones del día.</p>
-      
-      <div style="margin-top:1.5rem">
-        <label>Fecha<input type="date" value="${new Date().toISOString().split('T')[0]}"></label>
-        
-        <label>Clima (Selecciona uno)</label>
-        <div class="chip-group">
-          <button class="chip on">☀️ Soleado</button>
-          <button class="chip">⛅ Nublado</button>
-          <button class="chip">🌧 Lluvia</button>
-        </div>
-
-        <label style="margin-top:1rem;display:block">Actividades Realizadas<textarea placeholder="Ej: Vaciado de losa nervada, armado de columnas eje A..."></textarea></label>
-        
-        <label>Incidentes o Retrasos<textarea placeholder="Ej: El camión de concreto llegó tarde, lluvia paralizó obra 2 horas..." style="min-height:70px"></textarea></label>
-        
-        <button class="btn ghost" style="border:1.5px dashed var(--acc); display:flex; align-items:center; justify-content:center; gap:8px">
-          <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-          Adjuntar Foto del Día
-        </button>
-        
-        <button class="btn">Guardar Reporte</button>
-      </div>
-    `;
-  } 
-  
-  else if (view === 'cuadrilla') {
-    app.innerHTML = `
-      <h2>Control de Cuadrilla</h2>
-      <p class="mut">Asistencia y adelantos de la semana.</p>
-      
-      <div class="grid-2" style="margin-top:1.5rem">
-        <button class="btn" style="margin-top:0">+ Agregar Obrero</button>
-        <button class="btn ghost" style="margin-top:0; border:1px solid var(--acc)">Cálculo Sábado</button>
-      </div>
-
-      <h3 style="margin-top:2rem">Asistencia de Hoy</h3>
-      
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <b>Juan Pérez</b>
-            <small class="mut">Maestro de Obra · $30/día</small>
-          </div>
-          <button class="btn ghost" style="margin:0;padding:0.3rem 0.6rem;width:auto;font-size:0.9rem">Adelanto</button>
-        </div>
-        <label class="chk" style="margin-top:0.5rem">
-          <input type="checkbox" checked> Asistió hoy
-        </label>
-      </div>
-
-      <div class="card" style="border-left-color:var(--line)">
-        <div class="card-header">
-          <div>
-            <b>Carlos Gómez</b>
-            <small class="mut">Ayudante · $15/día</small>
-          </div>
-          <button class="btn ghost" style="margin:0;padding:0.3rem 0.6rem;width:auto;font-size:0.9rem">Adelanto</button>
-        </div>
-        <label class="chk" style="margin-top:0.5rem">
-          <input type="checkbox"> Asistió hoy
-        </label>
-      </div>
-    `;
-  }
-  
-  else if (view === 'punch') {
-    app.innerHTML = `
-      <h2>Pendientes (Punch List)</h2>
-      <p class="mut">Detalles a corregir antes de entregar la obra.</p>
-      
-      <div style="display:flex;gap:10px;margin-top:1.5rem">
-        <input type="text" placeholder="Ej: Pintar mancha en pasillo" style="margin:0">
-        <button class="btn" style="margin:0;width:auto;padding:0 1.2rem;font-size:1.5rem;line-height:1">+</button>
-      </div>
-
-      <h3 style="margin-top:2rem">Pendientes por resolver</h3>
-      
-      <div class="card">
-        <label class="chk">
-          <input type="checkbox">
-          <span style="flex:1">Falta marco puerta principal</span>
-        </label>
-        <div style="padding-left:34px;display:flex;gap:8px">
-          <span class="mut" style="font-size:0.85rem">Responsable: <b>Carpintero</b></span>
-        </div>
-      </div>
-
-      <div class="card">
-        <label class="chk">
-          <input type="checkbox">
-          <span style="flex:1">Fuga en lavamanos baño visita</span>
-        </label>
-        <div style="padding-left:34px;display:flex;gap:8px">
-          <span class="mut" style="font-size:0.85rem">Responsable: <b>Plomero</b></span>
-        </div>
-      </div>
-
-      <h3 style="margin-top:2rem">Corregidos</h3>
-      <div class="card" style="border-left-color:var(--line);background:none;box-shadow:none">
-        <label class="chk" style="opacity:0.6">
-          <input type="checkbox" checked disabled>
-          <span style="flex:1;text-decoration:line-through">Cerámica rota en cocina</span>
-        </label>
-      </div>
-    `;
-  }
-}
-
-document.body.addEventListener('click', e => {
-  if (e.target.matches('.chip-group .chip')) {
-    e.target.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
-    e.target.classList.add('on');
-  }
-});
-
-render();
+(async()=>{const d=await dbio('get');if(d){S=Object.assign(S,d);if(!S.f||!Array.isArray(S.f.fotos))S.f={fecha:hoy(),clima:'Soleado',act:'',inc:'',fotos:[]}}$('#ob').value=S.obra||'';render()})();
 </script>
 </body>
 </html>
