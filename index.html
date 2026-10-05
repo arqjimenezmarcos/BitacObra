@@ -118,7 +118,7 @@ const fd=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d).toLo
 const money=n=>'$'+(Math.round(n*100)/100).toLocaleString('es',{minimumFractionDigits:2,maximumFractionDigits:2});
 const wk=s=>{const[y,m,d]=s.split('-').map(Number),dw=(new Date(y,m-1,d).getDay()+6)%7;return[0,1,2,3,4,5,6].map(i=>ymd(new Date(y,m-1,d-dw+i)))};
 const logo=(a,b)=>`<svg class="lg" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="7" fill="${a}"/><path d="M24 6v6" stroke="${b}" stroke-width="3" stroke-linecap="round"/><rect x="7" y="17" width="34" height="14" rx="7" fill="none" stroke="${b}" stroke-width="3"/><path d="M17 20.5v7M31 20.5v7" stroke="${b}" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="24" r="3.6" fill="${b}"/><path d="M7 39h34M7 39v-3M15 39v-2M24 39v-3M33 39v-2M41 39v-3" stroke="${b}" stroke-width="2" stroke-linecap="round"/></svg>`;
-$('#lg').innerHTML=logo('var(--acc)','var(--accf)')+'<h1>Bitacbra<small>Bitácora de campo</small></h1>';
+$('#lg').innerHTML=logo('var(--acc)','var(--accf)')+'<h1>BitacObra<small>Bitácora de campo</small></h1>';
 
 /* Datos: se guardan en IndexedDB (aguanta muchas fotos) */
 let S={cur:'p1',P:{},emp:'',lgo:'',inv:[],obra:'',ubic:'',pers:[],rep:[],pen:[],asi:{},ade:[],n:0,f:{fecha:hoy(),clima:'Soleado',act:'',inc:'',fotos:[]}};
